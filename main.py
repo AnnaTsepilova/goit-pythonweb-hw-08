@@ -5,8 +5,6 @@ from src.api import tags, utils, notes, contacts
 app = FastAPI()
 
 app.include_router(utils.router, prefix="/api")
-# app.include_router(tags.router, prefix="/api")
-# app.include_router(notes.router, prefix="/api")
 
 app.include_router(contacts.router, prefix="/api")
 
