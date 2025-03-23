@@ -24,4 +24,17 @@ class Contact(Base):
     )
     description: Mapped[str] = mapped_column(String(255), nullable=False)
     done: Mapped[bool] = mapped_column(Boolean, default=False)
+    user_id = Column(
+        "user_id", ForeignKey("users.id", ondelete="CASCADE"), default=None
+    )
+    user = relationship("User", backref="notes")
 
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True)
+    email = Column(String, unique=True)
+    hashed_password = Column(String)
+    created_at = Column(DateTime, default=func.now())
+    avatar = Column(String(255), nullable=True)
+    confirmed = Column(Boolean, default=False)
